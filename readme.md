@@ -23,10 +23,9 @@ KnowYourProduct is a browser extension and backend service designed to assist us
 - `popup.html` & `popup.js`: Code for the extension's popup interface.
 - `images/`: Contains icons for the extension.
 
-### Backend (`KnowYourProduct-src/`)
+### Backend (`KnowYourProduct-AI-srv/`)
 - `.env`: Configuration for environment variables.
 - `config.py`: Loads and manages application settings.
-- `helper.py`: Utility functions for the backend.
 - `main.py`: Entry point for the backend service.
 - `ecommerce_processor/`: Core logic for processing product data.
   - `builders/`: Builds product data and prompts.
@@ -39,14 +38,34 @@ KnowYourProduct is a browser extension and backend service designed to assist us
 ## Installation
 
 ### Prerequisites
-- Python 3.10 or higher
-- Node.js (for building the browser extension)
+- Docker
 
-### Backend Setup
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-repo/KnowYourProduct.git
-   ```
-   ```bash
-   cd KnowYourProduct/KnowYourProduct-src
-   ```
+### Backend Setup using Docker
+
+These instructions assume you have Docker installed and running on your system.
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/AnudeepGadi/KnowYourProduct-AI-srv.git](https://github.com/AnudeepGadi/KnowYourProduct-AI-srv.git)
+    ```
+
+2.  **Navigate to the source directory:**
+    ```bash
+    cd KnowYourProduct-AI-srv
+    ```
+
+3.  **Build the Docker image:**
+    This command builds an image named `know-your-product-backend` using the `Dockerfile` in the current directory (`.`).
+    ```bash
+    docker build -t know-your-product-backend .
+    ```
+
+4.  **Run the Docker container:**
+    This command runs the container in detached mode (`-d`), maps port 8080 on your host machine to port 8080 inside the container (`-p 8080:8080`), and uses the image built in the previous step.
+    ```bash
+    docker run -d \
+      -p 8000:8000 \
+      know-your-product-backend
+    ```
+
+The backend service should now be running and accessible on `http://localhost:8080`.
