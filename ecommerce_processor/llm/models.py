@@ -2,6 +2,9 @@ from abc import ABC, abstractmethod
 from typing import Dict, List
 from config import Settings
 from openai import OpenAI
+from typing import Dict, List, Generator
+import json
+
 
 settings = Settings()
 
@@ -55,6 +58,19 @@ def create_llama4_client() -> OpenAI:
                 stream=False
             )
             return response.choices[0].message.content
-    
+
+        def generate_streaming_response(self, messages: List[Dict]) -> Generator[str, None, None]:
+            stream = self.client.chat.completions.create(
+                     model=self.model_name,
+                    temperature=self.temperature,
+                    max_tokens=self.max_tokens,
+                    messages=messages,
+                    stream=True
+            )
+
+            for chunk in stream:
+                if chunk.choices[0].delta.content is not None:
+                    yield chunk.choices[0].delta.content
+                
     return LLama4LLM(model_name=settings.FIREWORKS_LLAMA_MODEL_NAME)
             

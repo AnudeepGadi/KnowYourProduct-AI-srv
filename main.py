@@ -1,8 +1,10 @@
+import asyncio
+from typing import List
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 import json
 from uuid import uuid4
 from ecommerce_processor.factories.processor_factory import EcommerceProcessorFactory
-from ecommerce_processor.llm.chat import ask_llm
+from ecommerce_processor.llm.chat import ask_llm, ask_llm_stream
 from ecommerce_processor.models.chat_session import ChatSession
 from config import Settings
 
@@ -56,12 +58,29 @@ async def websocket_endpoint(websocket: WebSocket):
             if query_msg.get("type") == "query":
                 question = query_msg["question"]
                 chat_session.messages.append({"role": "user", "content": question})
-                llm_response = ask_llm(chat_session.messages)
+                # llm_response = ask_llm(chat_session.messages)
+                # chat_session.messages.append({"role": "assistant", "content": llm_response})
+                # await websocket.send_json({
+                #     "type": "query_response",
+                #     "response": llm_response
+                # })
+                # For streaming response, you can use a generator or async iterator
+                # and yield chunks of data to the WebSocket.
+                llm_response = ""
+                for chunk in ask_llm_stream(chat_session.messages):
+                    llm_response += chunk
+                    await asyncio.sleep(0.5)
+                    await websocket.send_json({
+                        "type": "query_response",
+                        "response": chunk
+                    })
                 chat_session.messages.append({"role": "assistant", "content": llm_response})
+
                 await websocket.send_json({
                     "type": "query_response",
-                    "response": llm_response
+                    "response": "==EOF=="
                 })
+                
                 
     except WebSocketDisconnect:
         if session_id:

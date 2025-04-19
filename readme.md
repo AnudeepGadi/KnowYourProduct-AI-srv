@@ -1,6 +1,6 @@
-# KnowUrProduct
+# KnowYourProduct
 
-KnowUrProduct is a browser extension and backend service designed to assist users in retrieving and presenting product information in a concise and fact-based manner. It integrates with Walmart's product data and uses LLMs (Large Language Models) to generate responses based on predefined templates.
+KnowYourProduct is a browser extension and backend service designed to assist users in retrieving and presenting product information in a concise and fact-based manner. It integrates with Walmart's product data and uses LLMs (Large Language Models) to generate responses based on predefined templates.
 
 ## Features
 
@@ -16,14 +16,14 @@ KnowUrProduct is a browser extension and backend service designed to assist user
 
 ## Project Structure
 
-### Extension (`knowurproduct-extension/`)
+### Extension (`KnowYourProduct-extension/`)
 - `background.js`: Handles background tasks for the extension.
 - `content.js`: Manages the chat window and user interactions.
 - `manifest.json`: Defines the extension's metadata and permissions.
 - `popup.html` & `popup.js`: Code for the extension's popup interface.
 - `images/`: Contains icons for the extension.
 
-### Backend (`knowurproduct-src/`)
+### Backend (`KnowYourProduct-src/`)
 - `.env`: Configuration for environment variables.
 - `config.py`: Loads and manages application settings.
 - `helper.py`: Utility functions for the backend.
@@ -45,5 +45,8 @@ KnowUrProduct is a browser extension and backend service designed to assist user
 ### Backend Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/knowurproduct.git
-   cd knowurproduct/knowurproduct-src
+   git clone https://github.com/your-repo/KnowYourProduct.git
+   ```
+   ```bash
+   cd KnowYourProduct/KnowYourProduct-src
+   ```

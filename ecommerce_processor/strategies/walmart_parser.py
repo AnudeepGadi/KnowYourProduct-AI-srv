@@ -33,12 +33,22 @@ class WalmartProductParser(ProductParser):
         product["description"] = product["shortDescription"]
         del product["shortDescription"]
 
-        specifications = "\n".join(
-            [f"{dic['name']}:{dic['value']}" for dic in idml["specifications"]]
+        specifications = (
+            "\n".join(
+                [f"{dic['name']}:{dic['value']}" for dic in idml["specifications"]]
+            )
+            if "specifications" in idml
+            else ""
         )
-        description = BeautifulSoup(idml["longDescription"], "html.parser").text
-        directions = "\n".join(
-            [f"{dic['name']}:{dic['value']}" for dic in idml["directions"]]
+        description = (
+            BeautifulSoup(idml["longDescription"], "html.parser").text
+            if "longDescription" in idml
+            else ""
+        )
+        directions = (
+            "\n".join([f"{dic['name']}:{dic['value']}" for dic in idml["directions"]])
+            if "directions" in idml
+            else ""
         )
 
         product["specifications"] = (
