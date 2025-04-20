@@ -17,11 +17,11 @@ KnowYourProduct is a browser extension and backend service designed to assist us
 ## Project Structure
 
 ### Extension (`KnowYourProduct-extension/`)
+[KnowYourProduct-AI-web-extension](https://github.com/AnudeepGadi/KnowYourProduct-AI-web-extension.git)
 - `background.js`: Handles background tasks for the extension.
 - `content.js`: Manages the chat window and user interactions.
 - `manifest.json`: Defines the extension's metadata and permissions.
 - `popup.html` & `popup.js`: Code for the extension's popup interface.
-- `images/`: Contains icons for the extension.
 
 ### Backend (`KnowYourProduct-AI-srv/`)
 - `.env`: Configuration for environment variables.
@@ -46,7 +46,7 @@ These instructions assume you have Docker installed and running on your system.
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/AnudeepGadi/KnowYourProduct-AI-srv.git](https://github.com/AnudeepGadi/KnowYourProduct-AI-srv.git)
+    git clone https://github.com/AnudeepGadi/KnowYourProduct-AI-srv.git
     ```
 
 2.  **Navigate to the source directory:**
