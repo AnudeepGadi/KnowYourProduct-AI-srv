@@ -29,6 +29,13 @@ class AbstractLLM(ABC):
         """
         pass
 
+    @abstractmethod
+    def generate_streaming_response(self, prompt: str) -> Generator[str, None, None]:
+        """
+        Generate a streaming response from the model based on the given prompt.
+        """
+        pass
+
 
 def create_llama4_client() -> OpenAI:
     """
